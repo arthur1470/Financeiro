@@ -42,16 +42,20 @@
 					
 					<h:outputLabel value="Data de Vencimento"/>
 					<h:inputText value="#{cadastroLancamentoBean.lancamento.dataVencimento}" size="12" label="Data de Vencimento">
+						
 						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />
 					</h:inputText>
 					
 					<h:outputLabel value="Data de Pagamento"/>
-					<h:inputText value="#{cadastroLancamentoBean.lancamento.dataPagamento}" size="12" label="Data de Pagamento">
+					<h:inputText value="#{cadastroLancamentoBean.lancamento.dataPagamento}" size="12" label="Data de Pagamento" 
+						id="dataPagamento">
 						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />
 					</h:inputText>
 					
 					<h:outputLabel />
-					<h:commandButton value="Salvar" action="#{cadastroLancamentoBean.salvar}" />
+					<h:commandButton value="Salvar" action="#{cadastroLancamentoBean.salvar}">
+						<f:ajax render="@form" execute="@form" />
+					</h:commandButton>
 					
 				</h:panelGrid>
 			</h:form>

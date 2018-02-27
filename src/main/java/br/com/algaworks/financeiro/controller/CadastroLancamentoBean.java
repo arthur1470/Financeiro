@@ -6,6 +6,7 @@ import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -48,6 +49,12 @@ public class CadastroLancamentoBean implements Serializable {
 		}
 	}
 
+	public void dataVencimentoAlterada(AjaxBehaviorEvent event) {
+		if(this.lancamento.getDataPagamento() == null) {
+			this.lancamento.setDataPagamento(this.lancamento.getDataVencimento());
+		}
+	}
+	
 	public TipoLancamento[] getTiposLancamentos() {
 		return TipoLancamento.values();
 	}

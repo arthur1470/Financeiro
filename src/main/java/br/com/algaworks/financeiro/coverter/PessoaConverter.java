@@ -1,4 +1,4 @@
-package br.com.algaworks.financeiro.converter;
+package br.com.algaworks.financeiro.coverter;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -15,8 +15,10 @@ public class PessoaConverter implements Converter {
 	@Inject
 	private PessoaRepository pessoaRepository;
 
+	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		Pessoa retorno = null;
+
 		if (value != null && !"".equals(value)) {
 			retorno = this.pessoaRepository.porId(new Long(value));
 		}
@@ -30,5 +32,4 @@ public class PessoaConverter implements Converter {
 		}
 		return null;
 	}
-
 }
