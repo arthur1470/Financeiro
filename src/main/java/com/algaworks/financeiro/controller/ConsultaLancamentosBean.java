@@ -3,27 +3,26 @@ package com.algaworks.financeiro.controller;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.persistence.EntityManager;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import com.algaworks.financeiro.model.Lancamento;
 import com.algaworks.financeiro.repository.LancamentoRepository;
-import com.algaworks.financeiro.util.JpaUtil;
 
-@ManagedBean(name = "consultaLancamentosBean")
+@Named("consultaLancamentosBean")
 @RequestScoped
 public class ConsultaLancamentosBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Inject
+	private LancamentoRepository lancamentosRepository;
+	
 	private List<Lancamento> lancamentos;
 
 	public void consultar() {
-		EntityManager manager = JpaUtil.getEntityManager();
-		LancamentoRepository repository = new LancamentoRepository(manager);
-		this.lancamentos = repository.todos();
-		manager.close();
+		this.lancamentos = lancamentosRepository.todos();		
 	}
 
 	public List<Lancamento> getLancamentos() {

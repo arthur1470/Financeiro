@@ -1,62 +1,82 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="/WEB-INF/template/layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-	<ui:composition template="/WEB-INF/template/layout.xhtml">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 		
-		<f:metadata>
-			<f:viewAction action="#{cadastroLancamentoBean.prepararCadastro}"></f:viewAction>
-		</f:metadata>
-		
-		<ui:define name="titulo">
-			Cadastro de Lançamento
-		</ui:define>
-	
-		<ui:define name="corpo">
-			<h1>Cadastro de lançamento</h1>
-			
-			<h:form id="frm">
-				<h:messages showDetail="false" showSummary="true" />
-				
-				<h:panelGrid columns="2">
-					<h:outputLabel value="Tipo" />					
-					<h:selectOneRadio value="#{cadastroLancamentoBean.lancamento.tipo}" label="Tipo do Lançamento">
-						<f:selectItems value="#{cadastroLancamentoBean.tiposLancamentos}" var="tipoLancamento" itemValue="#{tipoLancamento}"/>
-					</h:selectOneRadio>
+	<f:metadata>
+		<f:viewAction action="#{cadastroLancamentoBean.prepararCadastro}"></f:viewAction>
+	</f:metadata>
+
+	<ui:define name="titulo">
+		Cadastro de Lançamento
+	</ui:define>
+
+	<ui:define name="corpo">
+		<h1>Cadastro de lançamento</h1>
+
+		<h:form id="frm">
+			<h:messages showDetail="false" showSummary="true" />
+
+			<h:panelGrid columns="2">
+				<p:outputLabel value="Tipo" for="tipo" />
+				<p:selectOneButton value="#{cadastroLancamentoBean.lancamento.tipo}"
+					id="tipo">
+					<f:selectItems value="#{cadastroLancamentoBean.tiposLancamentos}"
+						var="tipoLancamento" itemValue="#{tipoLancamento}"
+						itemLabel="#{tipoLancamento.descricao}" />
+				</p:selectOneButton>
+
+				<p:outputLabel value="Pessoa " for="pessoa" />
+				<p:selectOneMenu value="#{cadastroLancamentoBean.lancamento.pessoa}"
+					id="pessoa" filter="true" filterMatchMode="contains">
+					<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+					<f:selectItems value="#{cadastroLancamentoBean.todasPessoas}"
+						var="pessoa" itemValue="#{pessoa}" itemLabel="#{pessoa.nome}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Descrição" for="descricao" />
+				<p:inputText value="#{cadastroLancamentoBean.lancamento.descricao}"
+					size="60" id="descricao" />
+
+				<p:outputLabel value="Valor" for="valor" />
+				<p:inputText value="#{cadastroLancamentoBean.lancamento.valor}"
+					size="12" id="valor">
+					<f:convertNumber minFractionDigits="2" maxFractionDigits="2"
+						locale="pt_BR" />
+				</p:inputText>
+
+				<p:outputLabel value="Data de Vencimento" for="dataVencimento" />
+				<p:calendar value="#{cadastroLancamentoBean.lancamento.dataVencimento}"
+					pattern="dd/MM/yyyy" size="12" id="dataVencimento">
 					
-					<h:outputLabel value="Pessoa "/>
-					<h:selectOneMenu value="#{cadastroLancamentoBean.lancamento.pessoa}" label="Pessoa">
-						<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
-						<f:selectItems value="#{cadastroLancamentoBean.todasPessoas}" var="pessoa" itemValue="#{pessoa}" itemLabel="#{pessoa.nome}" />
-					</h:selectOneMenu>
+					<p:ajax event="dateSelect" process="@this dataPagamento"
+						update="@this dataPagamento"
+						listener="#{cadastroLancamentoBean.dataVencimentoAlterada}" />
+						
+					<p:ajax event="change" process="@this dataPagamento"
+						update="@this dataPagamento"
+						listener="#{cadastroLancamentoBean.dataVencimentoAlterada}" />
 					
-					<h:outputLabel value="Descrição"/>
-					<h:inputText value="#{cadastroLancamentoBean.lancamento.descricao}" size="60" label="Descrição" />
-					
-					<h:outputLabel value="Valor"/>
-					<h:inputText value="#{cadastroLancamentoBean.lancamento.valor}" size="12" label="Valor">
-						<f:convertNumber minFractionDigits="2" maxFractionDigits="2" locale="pt_BR" />
-					</h:inputText>
-					
-					<h:outputLabel value="Data de Vencimento"/>
-					<h:inputText value="#{cadastroLancamentoBean.lancamento.dataVencimento}" size="12" label="Data de Vencimento">
-						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />
-					</h:inputText>
-					
-					<h:outputLabel value="Data de Pagamento"/>
-					<h:inputText value="#{cadastroLancamentoBean.lancamento.dataPagamento}" size="12" label="Data de Pagamento">
-						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />
-					</h:inputText>
-					
-					<h:outputLabel />
-					<h:commandButton value="Salvar" action="#{cadastroLancamentoBean.salvar}" />
-					
-				</h:panelGrid>
-			</h:form>
-					
-		</ui:define>
-	
-	</ui:composition>
-</html>
+					<f:convertDateTime pattern="dd/MM/yyyy"
+						timeZone="America/Sao_Paulo" />
+				</p:calendar>
+
+				<p:outputLabel value="Data de Pagamento" />
+				<p:calendar	value="#{cadastroLancamentoBean.lancamento.dataPagamento}"
+					pattern="dd/MM/yyyy" size="12" label="Data de Pagamento" id="dataPagamento">
+					<f:convertDateTime pattern="dd/MM/yyyy"
+						timeZone="America/Sao_Paulo" />
+				</p:calendar>
+
+				<p:outputLabel />
+				<p:commandButton value="Salvar" action="#{cadastroLancamentoBean.salvar}" update="@form" />
+			</h:panelGrid>
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
