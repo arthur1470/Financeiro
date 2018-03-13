@@ -54,4 +54,12 @@ public class ConsultaLancamentosBean implements Serializable {
 	public List<Lancamento> getLancamentos() {
 		return lancamentos;
 	}
+
+	public Lancamento getLancamentoSelecionado() {
+		return lancamentoSelecionado;
+	}
+
+	public void setLancamentoSelecionado(Lancamento lancamentoSelecionado) {
+		this.lancamentoSelecionado = lancamentoSelecionado;
+	}
 }

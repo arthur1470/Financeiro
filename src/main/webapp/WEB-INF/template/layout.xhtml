@@ -22,6 +22,9 @@
 
 		<header>
 			<h:graphicImage library="algaworks" name="logo.png" />
+			<div style="float: right; margin-right: 20px; margin-top: 8px">
+				Olá #{usuario.nome}
+			</div>
 		</header>
 
 		<div class="menu">
@@ -38,7 +41,7 @@
 					</p:submenu>
 
 					<p:submenu label="Sistema">
-						<p:menuitem value="Sair" />
+						<p:menuitem value="Sair" action="#{loginBean.logout}" />
 					</p:submenu>
 				</p:menubar>
 			</h:form>

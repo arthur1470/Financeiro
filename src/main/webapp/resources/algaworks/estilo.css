@@ -1,57 +1,66 @@
-body
-{
-	font-size: 12px;
-	font-family: Arial, Helvetica, sans-serif;
-	margin: 0px;
-	font-weight: normal;	
+body {
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
+    font-weight: normal;
 }
 
-header
-{
-	padding: 5px;
-	height: 90px;
-	height: 30px;
-	background-color: #545454;
-	color: #fff;
-	box-shadow: 0px 2px 2px #ccc;
+header {
+    padding: 5px;
+    height: 90px;
+    height: 30px;
+    background-color: #545454;
+    color: #fff;
+    box-shadow: 0px 2px 2px #ccc;
 }
 
-div.menu{
-	margin-bottom: 20px;
+div.menu {
+    margin-bottom: 20px;
 }
 
-.ajax-status{
-	position: fixed;
-	top: 85px;
-	right: 10px;
-	width: 35px;
-	height: 35px;
+.ajax-status {
+    position: fixed;
+    top: 85px;
+    right: 10px;
+    width: 35px;
+    height: 35px;
 }
 
-#conteudo
-{
-	padding: 0px 8px;
+#conteudo {
+    padding: 0px 8px;
 }
 
-footer
-{
-	border-top: 1px solid #ccc;
-	padding: 5px 8px;
-	margin-top: 20px;
-	margin-bottom: 10px;	
+footer {
+    border-top: 1px solid #ccc;
+    padding: 5px 8px;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
-h1
-{
-	font-size: 24px;
-	font-weight: 500;
-	padding: 0px;
-	margin: 0px;
-	margin-bottom: 10px;
+h1 {
+    font-size: 24px;
+    font-weight: 500;
+    padding: 0px;
+    margin: 0px;
+    margin-bottom: 10px;
 }
 
-.tamanho
-{
-	margin: 0px;
-	width: 100%;
+.tamanho {
+    margin: 0px;
+    width: 100%;
+}
+
+#login-dialog {
+    width: 260px;
+    margin: auto;
+    margin-top: 150px;
+}
+
+.grid-login{
+    background-color: #f2f2f2;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-top: 8px;
+    padding: 10px;
+    width: 100%;
 }
