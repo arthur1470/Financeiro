@@ -5,7 +5,7 @@
 	version="3.1">
 	<display-name>Financeiro</display-name>
 	<welcome-file-list>
-		<welcome-file>index.xhtml</welcome-file>
+		<welcome-file>Login.xhtml</welcome-file>
 	</welcome-file-list>
 	
 	<!-- Sobrescrevendo o registro de faces servlet e seu mapeamento -->
