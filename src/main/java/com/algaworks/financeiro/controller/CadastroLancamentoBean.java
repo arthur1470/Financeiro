@@ -37,6 +37,11 @@ public class CadastroLancamentoBean implements Serializable {
         this.todasPessoas = this.pessoas.todas();
     }
 
+    public String prepararEditar(Long id){
+        this.lancamento = lancamentos.porId(id);
+        return "CadastroLancamento?faces-redirect=true";
+    }
+
     public void salvar() {
         FacesContext context = FacesContext.getCurrentInstance();
 

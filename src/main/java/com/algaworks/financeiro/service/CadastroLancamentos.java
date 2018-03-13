@@ -13,7 +13,7 @@ public class CadastroLancamentos implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private LancamentoRepository lancamentoRepository;
+	private LancamentoRepository lancamentos;
 
 	@Transactional
 	public void salvar(Lancamento lancamento) throws NegocioException {
@@ -24,6 +24,17 @@ public class CadastroLancamentos implements Serializable {
 			throw new NegocioException("Data de pagamento não pode ser uma data futura.");					
 		}
 		
-		this.lancamentoRepository.guardar(lancamento);
+		this.lancamentos.guardar(lancamento);
+	}
+
+	@Transactional
+	public void excluir(Lancamento lancamento)throws NegocioException{
+		lancamento = this.lancamentos.porId(lancamento.getId());
+
+		if(lancamento.getDataPagamento() != null){
+			throw new NegocioException("Não é possível excluir um lançamento pago");
+		}
+
+		this.lancamentos.remover(lancamento);
 	}
 }

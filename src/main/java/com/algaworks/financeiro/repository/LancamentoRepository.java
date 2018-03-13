@@ -19,6 +19,10 @@ public class LancamentoRepository implements Serializable {
 	public void guardar(Lancamento lancamento) {
 		this.manager.merge(lancamento);
 	}
+
+	public void remover(Lancamento lancamento){
+		manager.remove(lancamento);
+	}
 	
 	public List<Lancamento> todos(){
 		TypedQuery<Lancamento> query = manager.createQuery("FROM Lancamento", Lancamento.class);

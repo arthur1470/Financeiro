@@ -19,6 +19,8 @@
 		<h1>Consulta de lançamentos</h1>
 
 		<h:form id="frm">
+            <p:messages autoUpdate="true" showDetail="false" showSummary="true" />
+
 			<p:dataTable value="#{consultaLancamentosBean.lancamentos}"
 				var="lancamento" border="1" cellspacing="0" cellpadding="2"
 				class="tamanho" paginator="true" paginatorPosition="bottom" rows="5">
@@ -53,6 +55,15 @@
 					<h:outputText value="#{lancamento.dataPagamento}">
 						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
 					</h:outputText>
+				</p:column>
+
+				<p:column>
+					<p:commandButton action="#{cadastroLancamentoBean.prepararEditar(lancamento.id)}"
+									 ajax="false" icon="ui-icon-pencil" />
+                    <p:commandButton action="#{consultaLancamentosBean.excluir}" title="Excluir"
+                        icon="ui-icon-trash" process="@this" update="@form" >
+                        <f:setPropertyActionListener value="#{lancamento}" target="#{consultaLancamentosBean.lancamentoSelecionado}" />
+                    </p:commandButton>
 				</p:column>
 
 			</p:dataTable>
