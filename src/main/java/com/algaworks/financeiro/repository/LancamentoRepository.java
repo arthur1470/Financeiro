@@ -16,12 +16,23 @@ public class LancamentoRepository implements Serializable {
 	@Inject
 	private EntityManager manager;
 	
-	public void adicionar(Lancamento lancamento) {
-		this.manager.persist(lancamento);
+	public void guardar(Lancamento lancamento) {
+		this.manager.merge(lancamento);
 	}
 	
 	public List<Lancamento> todos(){
-		TypedQuery<Lancamento> query = manager.createQuery("from Lancamento", Lancamento.class);
+		TypedQuery<Lancamento> query = manager.createQuery("FROM Lancamento", Lancamento.class);
 		return query.getResultList();
+	}
+
+	public List<String> descricoesQueContem(String descricao){
+		TypedQuery<String> query = manager.createQuery("SELECT DISTINCT descricao FROM Lancamento " +
+				"WHERE UPPER(descricao) LIKE UPPER(:descricao)", String.class);
+		query.setParameter("descricao", "%" + descricao + "%");
+		return query.getResultList();
+	}
+
+	public Lancamento porId(Long id){
+		return manager.find(Lancamento.class, id);
 	}
 }

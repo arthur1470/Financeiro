@@ -1,19 +1,18 @@
 package com.algaworks.financeiro.controller;
 
-import java.io.Serializable;
-import java.util.List;
+import com.algaworks.financeiro.model.Lancamento;
+import com.algaworks.financeiro.repository.LancamentoRepository;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import com.algaworks.financeiro.model.Lancamento;
-import com.algaworks.financeiro.repository.LancamentoRepository;
+import java.io.Serializable;
+import java.util.List;
 
 @Named("consultaLancamentosBean")
 @RequestScoped
 public class ConsultaLancamentosBean implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 
 	@Inject
@@ -21,6 +20,7 @@ public class ConsultaLancamentosBean implements Serializable {
 	
 	private List<Lancamento> lancamentos;
 
+	@PostConstruct
 	public void consultar() {
 		this.lancamentos = lancamentosRepository.todos();		
 	}

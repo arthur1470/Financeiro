@@ -24,6 +24,6 @@ public class CadastroLancamentos implements Serializable {
 			throw new NegocioException("Data de pagamento não pode ser uma data futura.");					
 		}
 		
-		this.lancamentoRepository.adicionar(lancamento);
+		this.lancamentoRepository.guardar(lancamento);
 	}
 }
